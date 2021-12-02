@@ -27,6 +27,7 @@ if ((([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "
 
 if($NOTADMIN)
 {
+    $Yourfile.IsReadOnly = $false
     break
 }
 else
@@ -56,6 +57,7 @@ for(1) {
             $MessageTitle = "替换失败"
             Write-Error $MessageTitle
             [System.Windows.MessageBox]::Show($MessageBody, $MessageTitle, $ButtonType, $MessageIcon)
+            $Yourfile.IsReadOnly = $false
             Throw $MessageBody
         }
         
@@ -65,6 +67,7 @@ for(1) {
         $MessageTitle = "安装成功"
         Write-Output $MessageTitle
         [System.Windows.MessageBox]::Show($MessageBody, $MessageTitle, $ButtonType, $MessageIcon)
+        $Yourfile.IsReadOnly = $false
         break;
     } Else {
         Write-Output "等待安装文件中......"
